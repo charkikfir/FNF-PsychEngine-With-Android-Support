@@ -23,7 +23,7 @@ import flixel.input.keyboard.FlxKey;
 
 using StringTools;
 
-class MainMenuState extends MusicBeatState
+class ExtraMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -33,11 +33,11 @@ class MainMenuState extends MusicBeatState
 	private var camAchievement:FlxCamera;
 	
 	var optionShit:Array<String> = [
-		'story_mode',
-		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
-		'options',
-                'extra'
+		'stare',
+		'carol',
+                 'face-him',
+                 'credits',
+                 'awards'
 	];
 
 	var magenta:FlxSprite;
@@ -198,7 +198,7 @@ class MainMenuState extends MusicBeatState
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				MusicBeatState.switchState(new TitleState());
+				MusicBeatState.switchState(new MainMenuState());
 			}
 
 			if (controls.ACCEPT)
@@ -235,25 +235,17 @@ class MainMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
-                                                                        case 'stare':
-                                                                        PlayState.SONG = Song.loadFromJson('stare-stare', 'stare');
-                                                                         LoadingState.loadAndSwitchState(new PlayState());
+									case 'stare':
+				                                        	PlayState.SONG = Song.loadFromJson('stare-stare', 'stare');
+                                                                            LoadingState.loadAndSwitchState(new PlayState());
                                                                          case 'face-him':
                                                                         PlayState.SONG = Song.loadFromJson('face-him-hard', 'face-him');
-                                       LoadingState.loadAndSwitchState(new PlayState());
+                                                                          LoadingState.loadAndSwitchState(new PlayState());
                                                                        case 'carol':
                                                                         PlayState.SONG = Song.loadFromJson('carol-hard', 'carol');
-                                       LoadingState.loadAndSwitchState(new PlayState());
-									case 'freeplay':
-										MusicBeatState.switchState(new FreeplayState());
-									#if MODS_ALLOWED
-									case 'mods':
-										MusicBeatState.switchState(new ModsMenuState());
-									#end
-									case 'extra':
-										MusicBeatState.switchState(new ExtraMenuState());
+                                                                           LoadingState.loadAndSwitchState(new PlayState());
+									case 'awards':
+										MusicBeatState.switchState(new AchievementsMenuState());
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
